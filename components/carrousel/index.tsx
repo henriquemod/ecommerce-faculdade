@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ImageBackground, ImageSourcePropType, View } from "react-native";
 import PagerView from "react-native-pager-view";
 
@@ -9,10 +9,26 @@ type CarrierProps = {
 export const Carrier = ({ images }: CarrierProps) => {
   const [currentPage, setCurrentPage] = useState(0);
   const totalPages = images.length;
+  const pagerViewRef = useRef<PagerView>(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      let nextPage = currentPage + 1;
+      if (nextPage >= totalPages) {
+        nextPage = 0; // Loop back to the first image
+      }
+      if (pagerViewRef.current) {
+        pagerViewRef.current.setPage(nextPage);
+      }
+    }, 6000); // Change image every 3 seconds
+
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, [currentPage, totalPages]);
 
   return (
     <View className="flex h-56 relative">
       <PagerView
+        ref={pagerViewRef}
         style={{ flex: 1 }}
         initialPage={0}
         onPageSelected={(e) => setCurrentPage(e.nativeEvent.position)}

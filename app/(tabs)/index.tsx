@@ -5,6 +5,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import React, { useState } from "react";
 import {
   SafeAreaView,
+  ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
@@ -18,77 +19,72 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView>
-      <View className="h-full">
-        <View className="border-b-zinc-400 border-b">
-          <View className="m-4 flex gap-2 flex-row border border-zinc-400 rounded-md p-2 items-center">
-            <View className="flex-1">
-              <TextInput
-                className="text-xl"
-                onChangeText={onChangeText}
-                value={text}
-              />
+      <ScrollView showsVerticalScrollIndicator={false} className="h-full">
+        <View className="h-full">
+          <View className="border-b-zinc-400 border-b">
+            <View className="m-4 flex gap-2 flex-row border border-zinc-400 rounded-md p-2 items-center">
+              <View className="flex-1">
+                <TextInput
+                  className="text-xl"
+                  onChangeText={onChangeText}
+                  value={text}
+                />
+              </View>
+              <View className="border border-zinc-400 h-full" />
+              <TouchableOpacity activeOpacity={1} onPress={() => alert(text)}>
+                <Ionicons name="search" size={28} />
+              </TouchableOpacity>
             </View>
-            <View className="border border-zinc-400 h-full" />
-            <TouchableOpacity activeOpacity={1} onPress={() => alert(text)}>
-              <Ionicons name="search" size={28} />
-            </TouchableOpacity>
           </View>
-        </View>
-        <View className="flex flex-col h-full justify-start gap-4 p-4">
-          <Carrier images={[Logo, Logo2]} />
-          <HorizontalIconMenu
-            menuItems={[
-              {
-                icon: "car",
-                label: "Veículos",
-              },
-              {
-                icon: "phone-portrait",
-                label: "Eletrônicos",
-              },
-              {
-                icon: "shirt",
-                label: "Roupa",
-              },
-              {
-                icon: "home",
-                label: "Casa",
-              },
-              {
-                icon: "fast-food",
-                label: "Alimentos",
-              },
-              {
-                icon: "barbell",
-                label: "Academia",
-              },
-              {
-                icon: "medical",
-                label: "Medicina",
-              },
-            ]}
-          />
-          <View>
-            <Text className="text-xl">Mais procurados em Veículos</Text>
-            <HorizontalSellCards
-              advertisements={[
+          <View className="flex flex-col h-full justify-start gap-4 p-4 bg-white">
+            <Carrier images={[Logo, Logo2]} />
+            <HorizontalIconMenu
+              menuItems={[
                 {
-                  user: {
-                    email: "email",
-                    phone: "asd",
-                    username: "asd",
-                  },
-                  category: "clothing",
-                  description: "asd",
-                  images: ["asd"],
-                  price: 123,
-                  title: "asd",
+                  icon: "car",
+                  label: "Veículos",
+                },
+                {
+                  icon: "phone-portrait",
+                  label: "Eletrônicos",
+                },
+                {
+                  icon: "shirt",
+                  label: "Roupa",
+                },
+                {
+                  icon: "home",
+                  label: "Casa",
+                },
+                {
+                  icon: "fast-food",
+                  label: "Alimentos",
+                },
+                {
+                  icon: "barbell",
+                  label: "Academia",
+                },
+                {
+                  icon: "medical",
+                  label: "Medicina",
                 },
               ]}
             />
+            <View className="flex gap-4 flex-col">
+              <Text className="text-xl">Mais procurados em Veículos</Text>
+              <HorizontalSellCards category="vehicles" />
+            </View>
+            <View className="flex gap-4 flex-col">
+              <Text className="text-xl">Mais procurados em Eletrônicos</Text>
+              <HorizontalSellCards category="electronics" />
+            </View>
+            <View className="flex gap-4 flex-col">
+              <Text className="text-xl">Mais procurados em Roupas</Text>
+              <HorizontalSellCards category="clothing" />
+            </View>
           </View>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }

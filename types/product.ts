@@ -1,7 +1,7 @@
 import { Category } from "./category";
 import { User } from "./user";
 
-export type Advertisement = {
+export type Product = {
   user: User;
   title: string;
   description: string;
