@@ -1,12 +1,6 @@
 import * as Icons from "@expo/vector-icons";
-import { ComponentProps, useState } from "react";
-import {
-  ImageSourcePropType,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { ComponentProps } from "react";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 
 const { Ionicons } = Icons;
 

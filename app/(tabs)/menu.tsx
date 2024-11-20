@@ -1,17 +1,10 @@
 import { Carrier } from "@/components/carrousel";
+import { HorizontalIconMenu } from "@/components/horizontal-icon-menu";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import React, { useState } from "react";
-import {
-  SafeAreaView,
-  ScrollView,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import Logo from "../assets/images/carrousel/img1.jpg";
-import Logo2 from "../assets/images/carrousel/img2.jpg";
-import { HorizontalIconMenu } from "@/components/horizontal-icon-menu/intex";
+import { SafeAreaView, TextInput, TouchableOpacity, View } from "react-native";
+import Logo from "../../assets/images/carrousel/img1.jpg";
+import Logo2 from "../../assets/images/carrousel/img2.jpg";
 
 export default function HomeScreen() {
   const [text, onChangeText] = useState("");
@@ -64,13 +57,6 @@ export default function HomeScreen() {
               },
             ]}
           />
-          <View className="border">
-            <Text>Footer</Text>
-            <Text>Footer</Text>
-            <Text>Footer</Text>
-            <Text>Footer</Text>
-            <Text>Footer</Text>
-          </View>
         </View>
       </View>
     </SafeAreaView>
