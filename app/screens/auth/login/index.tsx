@@ -1,9 +1,11 @@
-import { Text, View } from "react-native";
+import { SafeAreaView, Text, View } from "react-native";
 
 export default function LoginScreen() {
   return (
-    <View>
-      <Text>Ola Mundo</Text>
-    </View>
+    <SafeAreaView>
+      <View>
+        <Text>Ola Mundo</Text>
+      </View>
+    </SafeAreaView>
   );
 }
