@@ -1,7 +1,9 @@
 import { mockProducts } from "@/constants/mock-data";
 import { Category } from "@/types/category";
 import { Product } from "@/types/product";
+import { formatCurrency } from "@/utils/format-money";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "expo-router";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 
 type HorizontalSellCardsProps = {
@@ -27,10 +29,11 @@ export const HorizontalSellCards = ({ category }: HorizontalSellCardsProps) => {
     >
       <View className="flex flex-row gap-4">
         {data?.map((advertisement, index) => (
-          <TouchableOpacity
+          <Link
             key={index}
-            activeOpacity={1}
-            onPress={() => alert(advertisement.title)}
+            href={{
+              pathname: `/screens/product/${advertisement.id}` as any,
+            }}
             style={{ width: 168 }}
             className="bg-white rounded-md flex justify-start items-center gap-1 border border-zinc-400"
           >
@@ -51,13 +54,10 @@ export const HorizontalSellCards = ({ category }: HorizontalSellCardsProps) => {
                 {advertisement.description}
               </Text>
               <Text className="text-sm font-bold">
-                {advertisement.price?.toLocaleString("pt-br", {
-                  style: "currency",
-                  currency: "BRL",
-                })}
+                {formatCurrency(advertisement.price || 0)}
               </Text>
             </View>
-          </TouchableOpacity>
+          </Link>
         ))}
       </View>
     </ScrollView>

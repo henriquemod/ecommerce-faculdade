@@ -1,6 +1,8 @@
 import { Product } from "../types/product";
 import { User } from "../types/user";
 
+let id = 0;
+
 const mock_veicules = [
   "https://uploadimage.io/images/2024/11/20/carro1.jpg",
   "https://uploadimage.io/images/2024/11/20/moto1.jpg",
@@ -72,6 +74,7 @@ export const mockProducts: Product[] = [
   ].map(
     (title, index) =>
       ({
+        id: id++,
         user: getDataAlgorithm(index, mockUsers),
         title,
         description:
@@ -99,6 +102,7 @@ export const mockProducts: Product[] = [
   ].map(
     (title, index) =>
       ({
+        id: id++,
         user: getDataAlgorithm(index, mockUsers),
         title,
         description:
@@ -117,6 +121,7 @@ export const mockProducts: Product[] = [
   ].map(
     (title, index) =>
       ({
+        id: id++,
         user: getDataAlgorithm(index, mockUsers),
         title,
         description: "Roupa em ótimo estado, tamanho padrão brasileiro.",
@@ -134,6 +139,7 @@ export const mockProducts: Product[] = [
   ].map(
     (title, index) =>
       ({
+        id: id++,
         user: getDataAlgorithm(index, mockUsers),
         title,
         description:
@@ -148,6 +154,7 @@ export const mockProducts: Product[] = [
   ...["Panetone Bauducco", "Café Torrado Brasileiro", "Cachaça Artesanal"].map(
     (title, index) =>
       ({
+        id: id++,
         user: getDataAlgorithm(index, mockUsers),
         title,
         description: "Produto premium, sabor autenticamente brasileiro.",
@@ -165,6 +172,7 @@ export const mockProducts: Product[] = [
   ].map(
     (title, index) =>
       ({
+        id: id++,
         user: getDataAlgorithm(index, mockUsers),
         title,
         description: "Equipamento de academia de alta qualidade para treino.",
@@ -178,6 +186,7 @@ export const mockProducts: Product[] = [
   ...["Dipirona 500mg", "Vitamina D 1000ui", "Termômetro Digital"].map(
     (title, index) =>
       ({
+        id: id++,
         user: getDataAlgorithm(index, mockUsers),
         title,
         description:

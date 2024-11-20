@@ -33,7 +33,7 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="search"
+        name="search/[category]"
         options={{
           headerShown: false,
           tabBarLabel: "Buscar",

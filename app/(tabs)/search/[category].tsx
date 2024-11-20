@@ -1,13 +1,13 @@
-import { Carrier } from "@/components/carrousel";
-import { HorizontalIconMenu } from "@/components/horizontal-icon-menu";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { useLocalSearchParams } from "expo-router";
 import React, { useState } from "react";
 import { SafeAreaView, TextInput, TouchableOpacity, View } from "react-native";
-import Logo from "../../assets/images/carrousel/img1.jpg";
-import Logo2 from "../../assets/images/carrousel/img2.jpg";
 
-export default function HomeScreen() {
+export default function SearchScreen() {
+  const { category } = useLocalSearchParams();
   const [text, onChangeText] = useState("");
+
+  console.log({ category });
 
   return (
     <SafeAreaView>
