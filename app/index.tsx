@@ -1,10 +1,21 @@
-import { SafeAreaView, TextInput, TouchableOpacity, View } from "react-native";
-
+import { Carrier } from "@/components/carrousel";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { useState } from "react";
+import React, { useState } from "react";
+import {
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import Logo from "../assets/images/carrousel/img1.jpg";
+import Logo2 from "../assets/images/carrousel/img2.jpg";
+import { HorizontalIconMenu } from "@/components/horizontal-icon-menu/intex";
 
 export default function HomeScreen() {
   const [text, onChangeText] = useState("");
+
   return (
     <SafeAreaView>
       <View className="h-full">
@@ -21,6 +32,44 @@ export default function HomeScreen() {
             <TouchableOpacity activeOpacity={1} onPress={() => alert(text)}>
               <Ionicons name="search" size={28} />
             </TouchableOpacity>
+          </View>
+        </View>
+        <View className="flex flex-col h-full justify-start gap-4 p-4">
+          <Carrier images={[Logo, Logo2]} />
+          <HorizontalIconMenu
+            menuItems={[
+              {
+                icon: "car",
+                label: "Veículos",
+              },
+              {
+                icon: "phone-portrait-outline",
+                label: "Eletrônicos",
+              },
+              {
+                icon: "home-sharp",
+                label: "Casa",
+              },
+              {
+                icon: "fast-food",
+                label: "Alimentos",
+              },
+              {
+                icon: "barbell-outline",
+                label: "Academia",
+              },
+              {
+                icon: "medical",
+                label: "Medicina",
+              },
+            ]}
+          />
+          <View className="border">
+            <Text>Footer</Text>
+            <Text>Footer</Text>
+            <Text>Footer</Text>
+            <Text>Footer</Text>
+            <Text>Footer</Text>
           </View>
         </View>
       </View>
