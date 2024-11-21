@@ -43,30 +43,37 @@ export default function HomeScreen() {
                 {
                   icon: "car",
                   label: "Veículos",
+                  category: "vehicles",
                 },
                 {
                   icon: "phone-portrait",
                   label: "Eletrônicos",
+                  category: "electronics",
                 },
                 {
                   icon: "shirt",
                   label: "Roupa",
+                  category: "clothing",
                 },
                 {
                   icon: "home",
                   label: "Casa",
+                  category: "home",
                 },
                 {
                   icon: "fast-food",
                   label: "Alimentos",
+                  category: "food",
                 },
                 {
                   icon: "barbell",
                   label: "Academia",
+                  category: "gym",
                 },
                 {
                   icon: "medical",
                   label: "Medicina",
+                  category: "medicine",
                 },
               ]}
             />

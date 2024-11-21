@@ -48,16 +48,6 @@ const getDataAlgorithm = (id: number, data: any[]) => {
   return data[firstNumber];
 };
 
-const getVeiculeImage = (id: number) => {
-  const index = id % mock_veicules.length;
-  const firstNumber = Number(index.toString().charAt(0));
-  if (firstNumber >= mock_veicules.length) {
-    return getVeiculeImage(firstNumber);
-  }
-
-  return mock_veicules[firstNumber];
-};
-
 export const mockProducts: Product[] = [
   // Vehicles
   ...[
@@ -79,8 +69,8 @@ export const mockProducts: Product[] = [
         title,
         description:
           "Ótimo veículo para deslocamento urbano, em excelente estado.",
-        price: [12000, 5500, 1800][index],
-        images: [getVeiculeImage(index)],
+        price: getDataAlgorithm(index, [5000, 10000, 15000]),
+        images: [getDataAlgorithm(index, mock_veicules)],
         category: "vehicles",
       } satisfies Product)
   ),
@@ -107,7 +97,7 @@ export const mockProducts: Product[] = [
         title,
         description:
           "Produto seminovo, funciona perfeitamente, sem detalhes de uso.",
-        price: [2500, 3200, 2800][index],
+        price: getDataAlgorithm(index, [1500, 3500, 2500]),
         images: [getDataAlgorithm(index, mock_electronics)],
         category: "electronics",
       } satisfies Product)
@@ -125,7 +115,7 @@ export const mockProducts: Product[] = [
         user: getDataAlgorithm(index, mockUsers),
         title,
         description: "Roupa em ótimo estado, tamanho padrão brasileiro.",
-        price: [350, 220, 150][index],
+        price: getDataAlgorithm(index, [200, 150, 100]),
         images: [""],
         category: "clothing",
       } satisfies Product)
@@ -144,7 +134,7 @@ export const mockProducts: Product[] = [
         title,
         description:
           "Produto para sua casa, em perfeito estado de conservação.",
-        price: [1200, 800, 1500][index],
+        price: getDataAlgorithm(index, [1000, 500, 800]),
         images: [""],
         category: "home",
       } satisfies Product)
@@ -158,7 +148,7 @@ export const mockProducts: Product[] = [
         user: getDataAlgorithm(index, mockUsers),
         title,
         description: "Produto premium, sabor autenticamente brasileiro.",
-        price: [25, 30, 80][index],
+        price: getDataAlgorithm(index, [50, 30, 70]),
         images: [""],
         category: "food",
       } satisfies Product)
@@ -176,7 +166,7 @@ export const mockProducts: Product[] = [
         user: getDataAlgorithm(index, mockUsers),
         title,
         description: "Equipamento de academia de alta qualidade para treino.",
-        price: [100, 600, 120][index],
+        price: getDataAlgorithm(index, [100, 200, 150]),
         images: [""],
         category: "gym",
       } satisfies Product)
@@ -191,7 +181,7 @@ export const mockProducts: Product[] = [
         title,
         description:
           "Produto farmacêutico em embalagem original, dentro da validade.",
-        price: [10, 25, 50][index],
+        price: getDataAlgorithm(index, [10, 20, 15]),
         images: [""],
         category: "medicine",
       } satisfies Product)

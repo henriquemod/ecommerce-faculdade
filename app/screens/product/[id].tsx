@@ -51,7 +51,11 @@ export default function ProductScreen() {
       <View style={{ flex: 1 }} className="gap-4 h-fit p-4">
         <Image
           source={{ uri: data.images[0] }}
-          style={{ width: "100%", height: 200, borderRadius: 6 }}
+          style={{
+            width: "100%",
+            height: 200,
+            borderRadius: 6,
+          }}
         />
         <View className="flex flex-col gap-2 mt-4">
           <Text className="text-5xl text-zinc-800">
