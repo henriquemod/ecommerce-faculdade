@@ -4,6 +4,7 @@ import { HorizontalSellCards } from "@/components/horizontal-sell-cards/intex";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import React, { useState } from "react";
 import {
+  FlatList,
   SafeAreaView,
   ScrollView,
   Text,
@@ -13,6 +14,31 @@ import {
 } from "react-native";
 import Logo from "../../assets/images/carrousel/img1.jpg";
 import Logo2 from "../../assets/images/carrousel/img2.jpg";
+import { Category } from "@/types/category";
+
+type MenuCellsProps = {
+  category: Category;
+  title: string;
+};
+
+const MenuCells = ({ category, title }: MenuCellsProps) => {
+  return (
+    <View className="flex gap-4 flex-col">
+      <Text className="text-xl">{title}</Text>
+      <HorizontalSellCards category={category} />
+    </View>
+  );
+};
+
+const listOfCategories: MenuCellsProps[] = [
+  { category: "vehicles", title: "Mais procurados em Veículos" },
+  { category: "electronics", title: "Mais procurados em Eletrônicos" },
+  { category: "clothing", title: "Mais procurados em Roupas" },
+  { category: "home", title: "Mais procurados em Casa" },
+  { category: "food", title: "Mais procurados em Alimentos" },
+  { category: "gym", title: "Mais procurados em Academia" },
+  { category: "medicine", title: "Mais procurados em Medicina" },
+];
 
 export default function HomeScreen() {
   const [text, onChangeText] = useState("");
@@ -77,18 +103,9 @@ export default function HomeScreen() {
                 },
               ]}
             />
-            <View className="flex gap-4 flex-col">
-              <Text className="text-xl">Mais procurados em Veículos</Text>
-              <HorizontalSellCards category="vehicles" />
-            </View>
-            <View className="flex gap-4 flex-col">
-              <Text className="text-xl">Mais procurados em Eletrônicos</Text>
-              <HorizontalSellCards category="electronics" />
-            </View>
-            <View className="flex gap-4 flex-col">
-              <Text className="text-xl">Mais procurados em Roupas</Text>
-              <HorizontalSellCards category="clothing" />
-            </View>
+            {listOfCategories.map((category) => (
+              <MenuCells key={category.category} {...category} />
+            ))}
           </View>
         </View>
       </ScrollView>

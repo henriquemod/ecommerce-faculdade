@@ -65,35 +65,45 @@ export default function SearchScreen() {
           <FlatList
             data={data}
             showsVerticalScrollIndicator={false}
-            renderItem={({ item }) => (
-              <Link
-                className="my-2"
-                href={{ pathname: `/screens/product/${item.id}` as any }}
-              >
-                <View className="rounded-md flex flex-row h-32 gap-4 bg-white w-full">
-                  <Image
-                    source={{ uri: item.images[0] }}
-                    style={{
-                      width: 120,
-                      height: "100%",
-                      borderTopLeftRadius: 6,
-                      borderBottomLeftRadius: 6,
-                    }}
-                  />
-                  <View className="p-2 flex flex-col justify-between">
-                    <View className="flex flex-col gap-2">
-                      <Text className="text-lg">{item.title}</Text>
-                      <Text className="text-lg font-bold">
-                        {formatCurrency(item.price)}
+            ListEmptyComponent={() => {
+              return (
+                <View className="flex-1 justify-center items-center">
+                  <Text className="text-lg">No hay productos</Text>
+                </View>
+              );
+            }}
+            renderItem={({ item }) => {
+              console.log({ uri: item.images[0] });
+              return (
+                <Link
+                  className="my-2"
+                  href={{ pathname: `/screens/product/${item.id}` as any }}
+                >
+                  <View className="rounded-md flex flex-row h-32 gap-4 bg-white w-full">
+                    <Image
+                      source={{ uri: item.images[0] }}
+                      style={{
+                        width: 120,
+                        height: "100%",
+                        borderTopLeftRadius: 6,
+                        borderBottomLeftRadius: 6,
+                      }}
+                    />
+                    <View className="p-2 flex flex-col justify-between">
+                      <View className="flex flex-col gap-2">
+                        <Text className="text-lg">{item.title}</Text>
+                        <Text className="text-lg font-bold">
+                          {formatCurrency(item.price)}
+                        </Text>
+                      </View>
+                      <Text className="text-zinc-600">
+                        Vendido por: {item.user.username}
                       </Text>
                     </View>
-                    <Text className="text-zinc-600">
-                      Vendido por: {item.user.username}
-                    </Text>
                   </View>
-                </View>
-              </Link>
-            )}
+                </Link>
+              );
+            }}
             keyExtractor={(item) => item.id.toString()}
           />
         </View>
