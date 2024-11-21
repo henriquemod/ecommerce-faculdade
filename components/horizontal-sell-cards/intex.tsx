@@ -25,8 +25,6 @@ export const HorizontalSellCards = ({ category }: HorizontalSellCardsProps) => {
     return null;
   }
 
-  console.log({ category });
-
   return (
     <ScrollView
       horizontal
@@ -35,7 +33,6 @@ export const HorizontalSellCards = ({ category }: HorizontalSellCardsProps) => {
     >
       <View className="flex flex-row gap-4">
         {data?.map((advertisement, index) => {
-          console.log({ advertisement });
           return (
             <Link
               key={index}

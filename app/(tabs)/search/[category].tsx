@@ -73,7 +73,6 @@ export default function SearchScreen() {
               );
             }}
             renderItem={({ item }) => {
-              console.log({ uri: item.images[0] });
               return (
                 <Link
                   className="my-2"
