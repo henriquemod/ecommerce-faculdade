@@ -6,6 +6,7 @@ import {
 } from "expo-router";
 import { Formik, FormikHelpers } from "formik";
 import {
+  Image,
   SafeAreaView,
   Text,
   TextInput,
@@ -14,6 +15,8 @@ import {
 } from "react-native";
 import * as Yup from "yup";
 import Toast from "react-native-toast-message";
+
+import AppLogo from "../../../../assets/images/app_ecommerce_logo.png";
 
 interface LoginFormValues {
   username: string;
@@ -78,7 +81,14 @@ export default function LoginScreen(): JSX.Element {
 
   return (
     <SafeAreaView className="flex-1 bg-white">
-      <View className="flex-1 p-4 justify-center">
+      <View className="flex-1 p-4 justify-center items-center gap-8">
+        <Image
+          source={AppLogo}
+          style={{
+            width: 260,
+            height: 260,
+          }}
+        />
         <Text className="text-2xl font-bold mb-8 text-center">Login</Text>
 
         <Formik<LoginFormValues>
@@ -140,7 +150,7 @@ export default function LoginScreen(): JSX.Element {
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                  className="bg-blue-500 p-4 rounded-md mt-4"
+                  className="bg-zinc-700 p-4 rounded-md mt-4"
                   onPress={() => {
                     if (route.canGoBack() && !redirect) {
                       route.back();
