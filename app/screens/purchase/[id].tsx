@@ -19,7 +19,7 @@ export interface ProductScreenProps {
   product_id: number;
 }
 
-export default function ProductScreen() {
+export default function PurchaseScreen() {
   const token = useAuthStore((state) => state.token);
   const { id } = useLocalSearchParams();
   const router = useRouter();
@@ -43,11 +43,6 @@ export default function ProductScreen() {
       return response;
     },
   });
-
-  console.log({ token });
-
-  const buyClass = token ? "bg-green-700" : "bg-green-700/50";
-  const chatClass = token ? "bg-zinc-800" : "bg-zinc-800/50";
 
   const Content = useCallback(() => {
     if (!data) {
@@ -74,28 +69,6 @@ export default function ProductScreen() {
           <Text className="text-xl font-bold text-zinc-800">Descrição</Text>
           <Text className="text-lg text-zinc-800">{data.description}</Text>
         </View>
-        <View className="gap-4 justify-end flex-1">
-          <Link href={`/screens/auth/login?redirect=/screens/product/${id}`}>
-            <View className="rounded-lg p-4 flex justify-center items-center flex-row gap-2 bg-green-700 w-full">
-              <Ionicons name="cart-outline" size={18} color="white" />
-              <Text className="text-white font-bold">Comprar</Text>
-            </View>
-          </Link>
-          <TouchableOpacity
-            onPress={() => alert("Adicionado ao carrinho")}
-            disabled={!token}
-          >
-            <View
-              className={[
-                "rounded-lg p-4 flex justify-center items-center flex-row gap-2",
-                chatClass,
-              ].join(" ")}
-            >
-              <Ionicons name="chatbubbles-outline" size={18} color="white" />
-              <Text className="text-white font-bold">Contatar vendedor</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
       </View>
     );
   }, [data]);
@@ -110,7 +83,7 @@ export default function ProductScreen() {
         <View style={{ flex: 1 }}>
           <View className="border-b relative p-4 flex justify-center items-center flex-row h-14">
             <TouchableOpacity
-              onPress={() => router.navigate("/")}
+              onPress={() => router.back()}
               className="absolute left-4"
             >
               <Text>Voltar</Text>

@@ -1,63 +1,43 @@
-import { Carrier } from "@/components/carrousel";
-import { HorizontalIconMenu } from "@/components/horizontal-icon-menu";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import React, { useState } from "react";
-import { SafeAreaView, TextInput, TouchableOpacity, View } from "react-native";
-import Logo from "../../assets/images/carrousel/img1.jpg";
-import Logo2 from "../../assets/images/carrousel/img2.jpg";
+import { useAuthStore } from "@/store/user";
+import { useFocusEffect, useRouter } from "expo-router";
+import React, { useCallback } from "react";
+import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
-export default function HomeScreen() {
-  const [text, onChangeText] = useState("");
+export default function MenuScreen() {
+  const route = useRouter();
+  const { token, clearToken } = useAuthStore((store) => store);
+
+  useFocusEffect(
+    useCallback(() => {
+      if (!token) {
+        route.navigate("/screens/auth/login?redirect=/");
+      }
+    }, [token])
+  );
 
   return (
     <SafeAreaView>
-      <View className="h-full">
-        <View className="border-b-zinc-400 border-b">
-          <View className="m-4 flex gap-2 flex-row border border-zinc-400 rounded-md p-2 items-center">
-            <View className="flex-1">
-              <TextInput
-                className="text-xl"
-                onChangeText={onChangeText}
-                value={text}
-              />
-            </View>
-            <View className="border border-zinc-400 h-full" />
-            <TouchableOpacity activeOpacity={1} onPress={() => alert(text)}>
-              <Ionicons name="search" size={28} />
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View className="flex flex-col h-full justify-start gap-4 p-4">
-          <Carrier images={[Logo, Logo2]} />
-          <HorizontalIconMenu
-            menuItems={[
-              {
-                icon: "car",
-                label: "Veículos",
-              },
-              {
-                icon: "phone-portrait-outline",
-                label: "Eletrônicos",
-              },
-              {
-                icon: "home-sharp",
-                label: "Casa",
-              },
-              {
-                icon: "fast-food",
-                label: "Alimentos",
-              },
-              {
-                icon: "barbell-outline",
-                label: "Academia",
-              },
-              {
-                icon: "medical",
-                label: "Medicina",
-              },
-            ]}
-          />
-        </View>
+      <View className="h-full flex flex-col">
+        <TouchableOpacity className="border-b border-zinc-400 p-8 flex flex-row items-center gap-4">
+          <Ionicons name="person-circle-outline" size={32} color="#27272a" />
+          <Text className="text-zinc-800">Conta</Text>
+        </TouchableOpacity>
+        <TouchableOpacity className="border-b border-zinc-400 p-8 flex flex-row items-center gap-4">
+          <Ionicons name="bar-chart-outline" size={32} color="#27272a" />
+          <Text className="text-zinc-800">Minhas vendas</Text>
+        </TouchableOpacity>
+        <TouchableOpacity className="border-b border-zinc-400 p-8 flex flex-row items-center gap-4">
+          <Ionicons name="cart-outline" size={32} color="#27272a" />
+          <Text className="text-zinc-800">Minhas compras</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          className="border-b border-zinc-400 p-8 flex flex-row items-center gap-4"
+          onPress={clearToken}
+        >
+          <Ionicons name="exit-outline" size={32} color="#27272a" />
+          <Text className="text-zinc-800">Sair</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );

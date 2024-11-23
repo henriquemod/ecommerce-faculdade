@@ -9,6 +9,18 @@ export default function ScreensLayout() {
           headerShown: false,
         }}
       />
+      <Stack.Screen
+        name="auth/login/index"
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="settings/index"
+        options={{
+          headerShown: true,
+        }}
+      />
     </Stack>
   );
 }
