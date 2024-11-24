@@ -1,12 +1,12 @@
 import { useAuthStore } from "@/store/user";
-import { useFocusEffect, useRouter } from "expo-router";
+import { Link, useFocusEffect, useRouter } from "expo-router";
 import React, { useCallback } from "react";
 import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 export default function MenuScreen() {
   const route = useRouter();
-  const { token, clearToken } = useAuthStore((store) => store);
+  const { token, clearAuth } = useAuthStore((store) => store);
 
   useFocusEffect(
     useCallback(() => {
@@ -19,10 +19,12 @@ export default function MenuScreen() {
   return (
     <SafeAreaView>
       <View className="h-full flex flex-col">
-        <TouchableOpacity className="border-b border-zinc-400 p-8 flex flex-row items-center gap-4">
-          <Ionicons name="person-circle-outline" size={32} color="#27272a" />
-          <Text className="text-zinc-800">Conta</Text>
-        </TouchableOpacity>
+        <Link href="/screens/settings/profile">
+          <View className="border-b border-zinc-400 p-8 flex flex-row items-center gap-4 w-full">
+            <Ionicons name="person-circle-outline" size={32} color="#27272a" />
+            <Text className="text-zinc-800">Perfil</Text>
+          </View>
+        </Link>
         <TouchableOpacity className="border-b border-zinc-400 p-8 flex flex-row items-center gap-4">
           <Ionicons name="bar-chart-outline" size={32} color="#27272a" />
           <Text className="text-zinc-800">Minhas vendas</Text>
@@ -33,7 +35,7 @@ export default function MenuScreen() {
         </TouchableOpacity>
         <TouchableOpacity
           className="border-b border-zinc-400 p-8 flex flex-row items-center gap-4"
-          onPress={clearToken}
+          onPress={clearAuth}
         >
           <Ionicons name="exit-outline" size={32} color="#27272a" />
           <Text className="text-zinc-800">Sair</Text>

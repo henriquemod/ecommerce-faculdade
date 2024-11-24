@@ -16,9 +16,9 @@ export default function ScreensLayout() {
         }}
       />
       <Stack.Screen
-        name="settings/index"
+        name="settings/profile/index"
         options={{
-          headerShown: true,
+          headerShown: false,
         }}
       />
     </Stack>
