@@ -10,6 +10,18 @@ export default function ScreensLayout() {
         }}
       />
       <Stack.Screen
+        name="purchase/[id]/confirm-address-screen"
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="purchase/[id]/payment-screen"
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
         name="auth/login/index"
         options={{
           headerShown: false,

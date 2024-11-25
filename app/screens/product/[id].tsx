@@ -3,7 +3,7 @@ import { Product } from "@/types/product";
 import { formatCurrency } from "@/utils/format-money";
 import { useQuery } from "@tanstack/react-query";
 import { Link, useLocalSearchParams, useRouter } from "expo-router";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import {
   ActivityIndicator,
@@ -31,6 +31,14 @@ export default function ProductScreen() {
       return null;
     }
   };
+  const buyPath = useMemo(() => {
+    if (token) {
+      return `/screens/purchase/${id}/confirm-address-screen`;
+    }
+
+    return `/screens/auth/login?redirect=/screens/product/${id}`;
+  }, [id, token]);
+
   if (Array.isArray(id) || !id || isNaN(parseInt(id))) {
     handleGoBack();
   }
@@ -75,7 +83,7 @@ export default function ProductScreen() {
           <Text className="text-lg text-zinc-800">{data.description}</Text>
         </View>
         <View className="gap-4 justify-end flex-1">
-          <Link href={`/screens/auth/login?redirect=/screens/product/${id}`}>
+          <Link href={buyPath as any}>
             <View className="rounded-lg p-4 flex justify-center items-center flex-row gap-2 bg-green-700 w-full">
               <Ionicons name="cart-outline" size={18} color="white" />
               <Text className="text-white font-bold">Comprar</Text>
