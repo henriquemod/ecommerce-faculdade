@@ -4,30 +4,23 @@ export default function ScreensLayout() {
   return (
     <Stack>
       <Stack.Screen
-        name="product/[id]"
+        name="profile/index"
         options={{
           headerShown: false,
         }}
       />
       <Stack.Screen
-        name="purchase/[id]/confirm-address-screen"
+        name="purchase/history/index"
         options={{
           headerShown: false,
         }}
       />
       <Stack.Screen
-        name="purchase/[id]/payment-screen"
+        name="purchase/details/[id]/index"
         options={{
           headerShown: false,
         }}
       />
-      <Stack.Screen
-        name="auth/login/index"
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen name="settings" options={{ headerShown: false }} />
     </Stack>
   );
 }

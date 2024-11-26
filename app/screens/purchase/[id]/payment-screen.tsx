@@ -1,4 +1,6 @@
+import "react-native-get-random-values";
 import { useAuthStore } from "@/store/user";
+import { usePurchaseStore } from "@/store/purchase";
 import { Ionicons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { Formik, FormikHelpers } from "formik";
@@ -13,6 +15,9 @@ import {
 } from "react-native";
 import Toast from "react-native-toast-message";
 import * as Yup from "yup";
+import { Purchase } from "@/types/purchase";
+import { v4 as uuidv4 } from "uuid";
+import { mockProducts } from "@/constants/mock-data";
 
 interface PaymentFormValues {
   cardNumber: string;
@@ -41,11 +46,12 @@ const PaymentSchema = Yup.object().shape({
 
 export default function PaymentScreen() {
   const { user } = useAuthStore();
+  const { addPurchase } = usePurchaseStore();
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
 
   if (!user) {
-    router.replace("/screens/auth/login?redirect=/");
+    router.replace("/auth/login?redirect=/" as any);
     return null;
   }
 
@@ -62,7 +68,21 @@ export default function PaymentScreen() {
   ) => {
     try {
       console.log({ values });
+      // Simulate payment processing delay
       await new Promise((resolve) => setTimeout(resolve, 2000));
+
+      // Create a new Purchase object
+      const newPurchase: Purchase = {
+        id: uuidv4(), // Generate a unique ID
+        product: mockProducts.find((p) => p.id === Number(id))!, // Assuming mockProducts is accessible
+        date: new Date().toISOString(),
+        address: user.address,
+        // deliveryInstructions: user.deliveryInstructions, // Assuming this field exists
+        paymentMethod: "credit_card",
+      };
+
+      // Save the purchase to the store
+      await addPurchase(newPurchase);
 
       Toast.show({
         type: "success",
@@ -72,6 +92,7 @@ export default function PaymentScreen() {
         visibilityTime: 4000,
       });
 
+      // Redirect to Home or another appropriate screen
       router.replace("/");
     } catch (error) {
       console.error(error);
@@ -116,6 +137,7 @@ export default function PaymentScreen() {
               isSubmitting,
             }) => (
               <View className="space-y-4 flex-1 gap-2">
+                {/* Card Number */}
                 <View>
                   <Text className="text-lg mb-1">Numero do cartão</Text>
                   <TextInput
@@ -137,6 +159,8 @@ export default function PaymentScreen() {
                     </Text>
                   )}
                 </View>
+
+                {/* Expiry Date */}
                 <View>
                   <Text className="text-lg mb-1">
                     Data de expiração (MM/YY)
@@ -160,6 +184,8 @@ export default function PaymentScreen() {
                     </Text>
                   )}
                 </View>
+
+                {/* CVV */}
                 <View>
                   <Text className="text-lg mb-1">CVV</Text>
                   <TextInput
@@ -182,6 +208,8 @@ export default function PaymentScreen() {
                     </Text>
                   )}
                 </View>
+
+                {/* Cardholder Name */}
                 <View>
                   <Text className="text-lg mb-1">
                     Nome do titular do cartão
@@ -204,6 +232,8 @@ export default function PaymentScreen() {
                     </Text>
                   )}
                 </View>
+
+                {/* Submit Button */}
                 <View className="flex-1 justify-end">
                   <TouchableOpacity
                     className={`mt-6 px-4 py-3 rounded-md bg-purple-500 ${
@@ -225,6 +255,7 @@ export default function PaymentScreen() {
           </Formik>
         </View>
       </ScrollView>
+      <Toast />
     </SafeAreaView>
   );
 }

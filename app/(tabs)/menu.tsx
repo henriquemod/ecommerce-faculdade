@@ -29,10 +29,13 @@ export default function MenuScreen() {
           <Ionicons name="bar-chart-outline" size={32} color="#27272a" />
           <Text className="text-zinc-800">Minhas vendas</Text>
         </TouchableOpacity>
-        <TouchableOpacity className="border-b border-zinc-400 p-8 flex flex-row items-center gap-4">
-          <Ionicons name="cart-outline" size={32} color="#27272a" />
-          <Text className="text-zinc-800">Minhas compras</Text>
-        </TouchableOpacity>
+
+        <Link href="/screens/settings/purchase/history">
+          <View className="border-b border-zinc-400 p-8 flex flex-row items-center gap-4 w-full">
+            <Ionicons name="cart-outline" size={32} color="#27272a" />
+            <Text className="text-zinc-800">Minhas compras</Text>
+          </View>
+        </Link>
         <TouchableOpacity
           className="border-b border-zinc-400 p-8 flex flex-row items-center gap-4"
           onPress={clearAuth}
