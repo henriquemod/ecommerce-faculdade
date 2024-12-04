@@ -5,7 +5,7 @@ import { formatCurrency } from "@/utils/format-money";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useQuery } from "@tanstack/react-query";
 import { Link, useLocalSearchParams } from "expo-router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
@@ -18,16 +18,21 @@ import {
 } from "react-native";
 
 export default function SearchScreen() {
-  const { category } = useLocalSearchParams<{
+  const { category, query } = useLocalSearchParams<{
     category?: Category;
+    query?: string;
   }>();
-  const [text, onChangeText] = useState("");
+  const [text, onChangeText] = useState(query || "");
   const { data, isLoading } = useQuery<Product[]>({
     queryKey: ["products", { category }],
     queryFn: async () => {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       const response = Promise.resolve(
-        mockProducts.filter((p) => (!category ? true : p.category === category))
+        mockProducts
+          .filter((p) => (!category ? true : p.category === category))
+          .filter((p) =>
+            !query ? true : p.title.toLowerCase().includes(query.toLowerCase())
+          )
       );
       return response;
     },

@@ -6,14 +6,14 @@ import { Ionicons } from "@expo/vector-icons";
 
 export default function MenuScreen() {
   const route = useRouter();
-  const { token, clearAuth } = useAuthStore((store) => store);
+  const { token, clearAuth, user } = useAuthStore((store) => store);
 
   useFocusEffect(
     useCallback(() => {
-      if (!token) {
+      if (!token || !user) {
         route.navigate("/screens/auth/login?redirect=/");
       }
-    }, [token])
+    }, [token, user])
   );
 
   return (

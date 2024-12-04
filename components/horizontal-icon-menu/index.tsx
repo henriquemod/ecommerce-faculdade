@@ -27,7 +27,10 @@ export const HorizontalIconMenu = ({ menuItems }: HorizontalIconMenuProps) => {
         {menuItems.map((menuItem, index) => (
           <Link
             href={{
-              pathname: `/search/${menuItem.category}` as any,
+              pathname: `/search`,
+              params: {
+                category: menuItem.category,
+              },
             }}
             key={index}
           >

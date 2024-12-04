@@ -15,6 +15,7 @@ import {
 import Logo from "../../assets/images/carrousel/img1.jpg";
 import Logo2 from "../../assets/images/carrousel/img2.jpg";
 import { Category } from "@/types/category";
+import { useRouter } from "expo-router";
 
 type MenuCellsProps = {
   category: Category;
@@ -41,6 +42,7 @@ const listOfCategories: MenuCellsProps[] = [
 ];
 
 export default function HomeScreen() {
+  const router = useRouter();
   const [text, onChangeText] = useState("");
 
   return (
@@ -57,7 +59,15 @@ export default function HomeScreen() {
                 />
               </View>
               <View className="border border-zinc-400 h-full" />
-              <TouchableOpacity activeOpacity={1} onPress={() => alert(text)}>
+              <TouchableOpacity
+                activeOpacity={1}
+                onPress={() => {
+                  router.navigate({
+                    pathname: "/search" as any,
+                    params: { query: text },
+                  });
+                }}
+              >
                 <Ionicons name="search" size={28} />
               </TouchableOpacity>
             </View>

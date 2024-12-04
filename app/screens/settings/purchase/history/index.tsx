@@ -47,16 +47,6 @@ export default function PurchaseHistoryScreen() {
     </TouchableOpacity>
   );
 
-  if (!purchases.length) {
-    return (
-      <SafeAreaView className="flex-1 justify-center items-center bg-gray-100">
-        <Text className="text-lg text-gray-700">
-          Você ainda não fez nenhuma compra.
-        </Text>
-      </SafeAreaView>
-    );
-  }
-
   return (
     <SafeAreaView className="flex-1 bg-gray-100">
       <View className="relative p-4 flex justify-center items-center flex-row">
@@ -70,12 +60,18 @@ export default function PurchaseHistoryScreen() {
           Histórico de Compras
         </Text>
       </View>
-      <FlatList
-        data={purchases}
-        keyExtractor={(item) => item.id}
-        renderItem={renderItem}
-        contentContainerStyle={{ padding: 20 }}
-      />
+      {!purchases.length ? (
+        <Text className="text-lg text-gray-700 text-center mt-3">
+          Você ainda não fez nenhuma compra.
+        </Text>
+      ) : (
+        <FlatList
+          data={purchases}
+          keyExtractor={(item) => item.id}
+          renderItem={renderItem}
+          contentContainerStyle={{ padding: 20 }}
+        />
+      )}
     </SafeAreaView>
   );
 }

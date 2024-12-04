@@ -1,7 +1,7 @@
 import { Address } from "./address";
+import { DeliveryOption } from "./purchase";
 
-export type User = {
-  id: number;
+export interface User {
   username: string;
   email: string;
   phone: string;
@@ -9,4 +9,6 @@ export type User = {
   lastName?: string;
   address: Address;
   avatar?: string;
-};
+  deliveryInstructions?: string;
+  deliveryOption?: DeliveryOption; // New field for delivery option
+}

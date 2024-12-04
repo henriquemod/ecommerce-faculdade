@@ -1,3 +1,5 @@
+// PaymentScreen.tsx
+
 import "react-native-get-random-values";
 import { useAuthStore } from "@/store/user";
 import { usePurchaseStore } from "@/store/purchase";
@@ -68,6 +70,16 @@ export default function PaymentScreen() {
   ) => {
     try {
       console.log({ values });
+      if (!user.deliveryOption) {
+        Toast.show({
+          type: "error",
+          text1: "Erro de Entrega",
+          text2: "Por favor, selecione uma opção de entrega.",
+          position: "top",
+          visibilityTime: 4000,
+        });
+        return;
+      }
       // Simulate payment processing delay
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
@@ -77,7 +89,8 @@ export default function PaymentScreen() {
         product: mockProducts.find((p) => p.id === Number(id))!, // Assuming mockProducts is accessible
         date: new Date().toISOString(),
         address: user.address,
-        // deliveryInstructions: user.deliveryInstructions, // Assuming this field exists
+        deliveryInstructions: user.deliveryInstructions, // Include deliveryInstructions
+        deliveryOption: user.deliveryOption, // Include deliveryOption
         paymentMethod: "credit_card",
       };
 

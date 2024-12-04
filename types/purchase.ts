@@ -8,4 +8,11 @@ export type Purchase = {
   address: Address;
   deliveryInstructions?: string;
   paymentMethod: "credit_card";
+  deliveryOption: DeliveryOption;
 };
+
+export enum DeliveryOption {
+  PickupCenter = "pickup_center",
+  PickupEntry = "pickup_entry",
+  DeliveryDoor = "delivery_door",
+}

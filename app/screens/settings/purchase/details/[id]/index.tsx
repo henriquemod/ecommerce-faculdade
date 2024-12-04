@@ -1,5 +1,5 @@
 import { usePurchaseStore } from "@/store/purchase";
-import { Purchase } from "@/types/purchase";
+import { Purchase, DeliveryOption } from "@/types/purchase"; // Ensure DeliveryOption is imported
 import { formatCurrency } from "@/utils/format-money";
 import { format } from "date-fns";
 import { useLocalSearchParams, useRouter } from "expo-router";
@@ -35,6 +35,29 @@ export default function PurchaseDetailScreen() {
       </SafeAreaView>
     );
   }
+
+  // Define the delivery options mapping
+  const deliveryOptionsMap = {
+    pickup_center: {
+      label: "Retirar em um centro de distribuição próximo",
+      message: "Economia de 10% retirando no local",
+      messageType: "success", // For green label
+    },
+    pickup_entry: {
+      label: "Retirar na entrada/portaria do prédio",
+      message: null, // No message for this option
+      messageType: null,
+    },
+    delivery_door: {
+      label: "Receber na porta de casa/apartamento",
+      message:
+        "Entregas na porta possuem um adicional de 30% no valor da entrega",
+      messageType: "warning", // For orange label
+    },
+  };
+
+  // Get the delivery option details
+  const deliveryOptionDetails = deliveryOptionsMap[purchase.deliveryOption];
 
   return (
     <SafeAreaView className="flex-1 bg-gray-100">
@@ -84,6 +107,36 @@ export default function PurchaseDetailScreen() {
             {purchase.address.zipCode}
           </Text>
         </View>
+
+        {/* **New Section: Delivery Method** */}
+        <View className="mb-4">
+          <Text className="text-xl font-semibold">Método de Entrega:</Text>
+          <Text className="text-lg">{deliveryOptionDetails.label}</Text>
+          {deliveryOptionDetails.message && (
+            <View
+              className={`mt-2 p-2 border rounded-md ${
+                deliveryOptionDetails.messageType === "success"
+                  ? "bg-green-100 border-green-400"
+                  : deliveryOptionDetails.messageType === "warning"
+                  ? "bg-orange-100 border-orange-400"
+                  : ""
+              }`}
+            >
+              <Text
+                className={`text-sm ${
+                  deliveryOptionDetails.messageType === "success"
+                    ? "text-green-800"
+                    : deliveryOptionDetails.messageType === "warning"
+                    ? "text-orange-800"
+                    : ""
+                }`}
+              >
+                {deliveryOptionDetails.message}
+              </Text>
+            </View>
+          )}
+        </View>
+        {/* **End of New Section** */}
 
         {purchase.deliveryInstructions && (
           <View className="mb-4">
